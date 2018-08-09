@@ -32,6 +32,7 @@ import javax.naming.directory.*;
 
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.MoreExecutors;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -608,6 +609,13 @@ public class LDAPAuthenticator implements IAuthenticator
             final User other = (User) obj;
 
             return this.username.equals(other.username);
+        }
+
+        @Override
+        public int hashCode() {
+            return new HashCodeBuilder(19, 29)
+                    .append(username)
+                    .toHashCode();
         }
     }
 }
